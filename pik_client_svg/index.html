@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf8">
+	<script type="text/javascript" src="jquery-1.11.0.min.js"></script>
+	<script type="text/javascript" src="jquery-migrate-1.2.1.min.js"></script>
+	<script type="text/javascript" src="lodash.min.js"></script>
+	<script type="text/javascript" src="snap.svg.js"></script>
+	<script type="text/javascript" src="jquery.tipsy.js"></script>
+	<link rel="stylesheet" type="text/css" href="tipsy.css">
+</head>
+<body>
+<div class="plan">
+	<img src="borisovichy_top_07_1200.67eb.png">
+</div>
+<script type="text/javascript" src='script.js'></script>
+<script type="text/template" id="template-tooltip">
+	<div class="tooltip <%= tooltipClass.map(function(x){return 'tooltip-'+x}).join(' ') %>">
+		<p class="title">
+			<%= title %>
+		</p>
+		<p class="address">
+			<%= address %>
+		</p>
+	</div>
+</script>
+
+
+<style type="text/css">
+	.tooltip {
+		padding: 0;
+	}
+	.tooltip .title {
+		padding: 0.2em 1em;
+		margin: 0;
+		text-align: center;
+		height: 1em;
+		color: #f7f7f7;
+	}
+	.tooltip .address {
+		margin: 0;
+		padding: 0.2em 1em;
+		text-align: center;
+		height: 1em;
+		color: #525b6f;
+	}
+	.tooltip-red .title {background: red}
+	.tooltip-green .title {background: green}
+	.tooltip-grey .title {background: white; color: #525b6f}
+	.tooltip-grey .address {background: #d6d9e1}
+
+</style>
+</body>
+</html>
