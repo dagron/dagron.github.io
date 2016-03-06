@@ -4,17 +4,17 @@
 	<title></title>
 	<meta charset="utf-8">
 	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="build/css/bootstrap.min.css" >
+	<link rel="stylesheet" href="static/build/css/bootstrap.min.css" >
 
 	<!-- Optional theme -->
-	<link rel="stylesheet" href="build/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="static/build/css/bootstrap-theme.min.css">
 
-	<link rel="stylesheet" href="build/css/ds-diget.css" >
+	<link rel="stylesheet" href="static/build/css/ds-diget.css" >
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 	
 
 	<!-- Latest compiled and minified JavaScript -->
-	<script src="build/js/bootstrap.min.js" ></script>
+	<script src="static/build/js/bootstrap.min.js" ></script>
 	<style>
 		.counter-display {
 			background: black;
@@ -53,8 +53,21 @@
 
 		input[type=checkbox].check-toggle:checked + label:before { content: "\f046"; } /* checked icon */
 		input[type=checkbox].check-toggle:checked + label:before { letter-spacing: 8px; } /* allow space for check mark */
-
+		
+		#navbar-clock
+{
+    position: absolute;
+    width: 100%;
+    left: 0;
+    text-align: center;
+    margin: auto;
+	height: 50px;
+	padding: 15px;
+	font-size: 18px;
+	line-height: 20px;
+}
 	</style>
+
 </head>
 <body>
 	
@@ -64,10 +77,12 @@
           <div class="navbar-header">
             <a class="navbar-brand" href="#">Маслораздача</a>
           </div>
+          <p id="navbar-clock"> </p>
           <div id="navbar" class="">
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="">Настройки</a></li>
-              <li><a href="#">Выход</a></li>
+              <li><a href="">
+Настройки <i class="fa fa-cogs fa-lg	"></i></span></a></li>
+              <li><a href="#">Администратор <span class="fa fa-power-off fa-lg"></span></a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
@@ -170,8 +185,30 @@
 				scope: {
 				    value: '=value'
 				},
-			  	templateUrl: "build/template/diget-display.html"
+			  	templateUrl: "static/build/template/diget-display.html"
 		}});
+	</script>
+	<script type="text/javascript">
+		var clock = (function clock(clockNode){
+		    clock = clock || document.querySelector('#navbar-clock');
+		    //var currentTime,hours,minutes,seconds,timeOfDay;
+		    return function()
+		    {
+		        /*currentTime = new Date();
+		        hours = currentTime.getHours();
+		        minutes = currentTime.getMinutes();
+		        seconds = currentTime.getSeconds();
+		        timeOfDay = (hours < 12) ? 'AM' : 'PM';*/
+		        //clockNode.innerHTML = (hours + ":" + minutes + ":" + seconds + timeOfDay);
+		        clockNode.replaceChild(
+		            document.createTextNode(
+		                (new Date()).toLocaleTimeString()
+		            ),
+		            clockNode.childNodes.item(0)
+		        );
+		    };
+		}(document.getElementById('navbar-clock')));
+		var clockInterval = setInterval(clock, 1000);
 	</script>
 </body>
 </html>
