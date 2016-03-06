@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="build/css/bootstrap.min.css" >
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="build/css/bootstrap-theme.min.css">
+
+	<link rel="stylesheet" href="build/css/ds-diget.css" >
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="build/js/bootstrap.min.js" ></script>
+	<style>
+		.counter-display {
+			background: black;
+			position: relative;
+    	    width: 100%;
+			padding-bottom: 60%;
+			float: left;
+			height: 0;
+			margin: 0 0 20px 0;
+		}
+		.counter-lcd {
+			fill: rgb(100,255,255);
+			filter:url(#glow);
+		}
+
+		.counter-display svg {
+			font-family: 'ds-digitalitalic';
+		    width: 100%;
+		    height: 100%;
+		    position: absolute;
+		    left: 0;
+		}
+
+		input[type="checkbox"].check-toggle {
+		    display: none;
+		}
+
+		input[type=checkbox].check-toggle + label:before {
+		  font-family: FontAwesome;
+		  display: inline-block;
+		}
+		
+		input[type=checkbox].check-toggle + label { font-size: 1.5em;  } /* unchecked icon */
+		input[type=checkbox].check-toggle + label:before { content: "\f096";} /* unchecked icon */
+		input[type=checkbox].check-toggle + label:before { letter-spacing: 11px; } /* space between checkbox and label */
+
+		input[type=checkbox].check-toggle:checked + label:before { content: "\f046"; } /* checked icon */
+		input[type=checkbox].check-toggle:checked + label:before { letter-spacing: 8px; } /* allow space for check mark */
+
+	</style>
+</head>
+<body>
+	
+ 	<!-- Static navbar -->
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Маслораздача</a>
+          </div>
+          <div id="navbar" class="">
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="">Настройки</a></li>
+              <li><a href="#">Выход</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
+
+	<div class="container" ng-app="Maslo" ng-controller="IssueManuallCtrl" >
+		<div class="row"><h2 class="text-center">ПИСТОЛЕТ №1 <b>Моторное масло №1</b></div>
+		<hr>
+		<div class="row">
+			<div class="col-xs-12 col-md-6">
+				<div class="row"><h3>К выдаче:<h3></div>
+				<form class="form-horizontal">	
+  					<div class="form-group">
+  						<div class="input-group">
+      						<div class="input-group-addon">Литров: </div>
+  							<input id="value-for-amount" ng-readonly="unlimited || issue_flag "  type="text" class="form-control input-lg text-right" ng-model="volum" >
+					        <div class="input-group-addon">
+					        	<input type="checkbox" ng-disabled="issue_flag " class="check-toggle" id="in-facts" ng-model="unlimited">
+					        	<label for="in-facts">Выдать по факту</label>
+					        </div>
+					    </div>
+					 </div>
+					 <div class="form-group">
+						<label for='comment'><h3>Примечание</h3></label>
+					 	<textarea class="form-control" rows="6" name="comment" ng-model="comment"></textarea>
+					 </div>
+
+				</form>
+				
+				<div class="row"></div>
+			</div>
+			<div class="col-xs-12 col-md-6 ">
+				<div class="row"><h3>Статус: <span class="statusBar">{{current_state}}</span><h3> </div>
+				<diget-display value="current_value"></diget-display>
+			</div>
+	    </div>
+	    <div class="row">
+		    <div class="btn-group btn-group-justified" role="group">
+		    	<a href="/fluid/given/" ng-disabled="issue_flag " class="btn btn-default btn-lg" role="button">Назад</a>
+		    	<buttom ng-if="!issue_flag" ng-click='startIssue()' href="#" class="btn  btn-success btn-lg" role="button">Начать выдачу</buttom>
+		    	<buttom ng-if="issue_flag" ng-click='stopIssue()' href="#" class="btn  btn-danger btn-lg" role="button">Остнановить выдачу</buttom>
+		    </div>
+	    </div>
+	<div class="row">
+		
+	</div>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
+	<script>
+	var val_cache;
+	var toType = function(obj) {
+  return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase()
+}
+		var app = angular.module('Maslo', []);
+		app.controller('IssueManuallCtrl', function($scope,$interval) {
+		    $scope.current_value= val_cache || 0.0;
+		    $scope.current_state= "";
+		    $scope.issueIntervalHandler = undefined;
+		    $scope.issue_flag = false;
+
+		    $scope.startIssue = function(){
+		    	if ($scope.unlimited) 
+		    		$scope.volum = 0;
+		  		$scope.issue_flag= true;
+		    	$scope.current_state = 'Произодиться выдача';
+		    	$scope.current_value = 0;
+		    	$scope.issueIntervalHandler = $interval(function(){
+		    		if ((Number($scope.current_value) < $scope.volum) || ($scope.unlimited)) {
+		    			var  tmp_val = Number($scope.current_value) + 0.1;
+		    			$scope.current_value = tmp_val.toFixed(1)
+		    		} else {
+		    			$scope.stopIssue();
+		    		}
+
+		    	},200)
+		    }
+		    $scope.stopIssue = function(){
+		    	if ($scope.unlimited) {
+		    		$scope.volum =  $scope.current_value;
+		    	}
+		    	console.log($scope.current_value);
+		    	val_cache = $scope.current_value;
+		    	$scope.current_value = Number($scope.volum) || "0.0";
+		    	$scope.current_state = 'Выдача завершена';
+		    	$interval.cancel($scope.issueIntervalHandler);
+		    	$scope.issueIntervalHandler = undefined;
+		    	$scope.issue_flag = false;
+		    }
+
+		});
+		app.directive('digetDisplay', function(){
+			return {
+				restrict: 'E',
+				scope: {
+				    value: '=value'
+				},
+			  	templateUrl: "build/template/diget-display.html"
+		}});
+	</script>
+</body>
+</html>
