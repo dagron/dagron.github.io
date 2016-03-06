@@ -77,7 +77,7 @@
           <div class="navbar-header">
             <a class="navbar-brand" href="#">Маслораздача</a>
           </div>
-          <p id="navbar-clock "> </p>
+          <p id="navbar-clock" class="hidden-xs"> </p>
           <div id="navbar" class="">
             <ul class="nav navbar-nav navbar-right">
               <li><a href="">
@@ -190,7 +190,7 @@
 	</script>
 	<script type="text/javascript">
 		var clock = (function clock(clockNode){
-		    clock = clock || document.querySelector('#navbar-clock');
+		    clockNode = clockNode || document.querySelector('#navbar-clock');
 		    //var currentTime,hours,minutes,seconds,timeOfDay;
 		    return function()
 		    {
@@ -207,7 +207,7 @@
 		            clockNode.childNodes.item(0)
 		        );
 		    };
-		}(document.getElementById('navbar-clock')));
+		}(document.querySelector('#navbar-clock')));
 		var clockInterval = setInterval(clock, 1000);
 	</script>
 </body>
