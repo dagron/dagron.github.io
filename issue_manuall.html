@@ -67,6 +67,22 @@
 	line-height: 20px;
 }
 	</style>
+	
+	<!-- jQuery + jQuery-UI -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+	<!-- keyboard -->
+	<link href="keyboard.min.css" rel="stylesheet">
+	<link href="jquery-ui.css" rel="stylesheet">
+	<!-- <link href="https://code.jquery.com/ui/1.11.4/themes/dot-luv/jquery-ui.css" rel="stylesheet"> -->
+	<script src="jquery.keyboard.min.js"></script>
+	<!-- keyboard extensions (optional) -->
+	<script src="jquery.mousewheel.min.js"></script>
+
+
+
+	<script src="ng-virtual-keyboard.js"></script>
 
 </head>
 <body>
@@ -98,7 +114,7 @@
   					<div class="form-group">
   						<div class="input-group">
       						<div class="input-group-addon">Литров: </div>
-  							<input id="value-for-amount" ng-readonly="unlimited || issue_flag "  type="text" class="form-control input-lg text-right" ng-model="volum" >
+  							<input id="value-for-amount" ng-readonly="unlimited || issue_flag "  type="text" class="form-control input-lg text-right" ng-model="volum" ng-virtual-keyboard="tVolumConfig">
 					        <div class="input-group-addon">
 					        	<input type="checkbox" ng-disabled="issue_flag " class="check-toggle" id="in-facts" ng-model="unlimited">
 					        	<label for="in-facts">Выдать по факту</label>
@@ -142,8 +158,36 @@
 	var toType = function(obj) {
   return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase()
 }
-		var app = angular.module('Maslo', []);
-		app.controller('IssueManuallCtrl', function($scope,$interval) {
+		var app = angular.module('Maslo', ['ng-virtual-keyboard']);
+		app.config(['VKI_CONFIG', function(VKI_CONFIG){
+			VKI_CONFIG.position = {
+				of: 'body',
+				my: 'center top',
+				at: 'center bottom'
+			};
+			VKI_CONFIG.tabNavigation = true;
+
+			VKI_CONFIG.extensions = {
+				addTyping: false
+			};
+		}])
+		app.controller('IssueManuallCtrl', function($scope,$interval,ngVirtualKeyboardService) {
+		    	$scope.tVolumConfig = {
+				display: {
+					'bksp'   :  "\u2190",
+					'accept' : 'Ввод'
+				},
+				layout: 'custom',
+				customLayout: {
+					'normal': [
+						'1 2 3 ',
+						'4 5 6 ',
+						'7 8 9 ',
+						'. 0  {bksp}',
+						'{accept} '
+					]}
+
+			};
 		    $scope.current_value= val_cache || 0.0;
 		    $scope.current_state= "";
 		    $scope.issueIntervalHandler = undefined;
