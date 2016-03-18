@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" >
+
+
+
+	<script src="static/build/js/bootstrap.min.js" ></script>
+	<style>
+.form-signin
+{
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+.form-signin .form-signin-heading, .form-signin .checkbox
+{
+    margin-bottom: 10px;
+}
+.form-signin .checkbox
+{
+    font-weight: normal;
+}
+.form-signin .form-control
+{
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.form-signin .form-control:focus
+{
+    z-index: 2;
+}
+.form-signin input[type="text"]
+{
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.form-signin input[type="password"]
+{
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.account-wall
+{
+    margin-top: 20px;
+    padding: 40px 0px 20px 0px;
+    background-color: #f7f7f7;
+    border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 15px;
+}
+.login-title
+{
+    color: #555;
+    font-size: 24px;
+    font-weight: 400;
+    display: block;
+}
+.profile-img
+{
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 10px;
+    display: block;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+.need-help
+{
+    margin-top: 10px;
+}
+.new-account
+{
+    display: block;
+    margin-top: 10px;
+}
+
+body {
+	background: url(static/build/css/img/bg.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+}
+
+
+	</style>
+	
+	<!-- jQuery + jQuery-UI -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+	<!-- keyboard -->
+	<link href="keyboard.min.css" rel="stylesheet">
+	<link href="jquery-ui.css" rel="stylesheet">
+	<!-- <link href="https://code.jquery.com/ui/1.11.4/themes/dot-luv/jquery-ui.css" rel="stylesheet"> -->
+	<script src="jquery.keyboard.min.js"></script>
+	<!-- keyboard extensions (optional) -->
+	<script src="jquery.mousewheel.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular.min.js"></script>
+
+
+
+	<!-- <script src="ng-virtual-keyboard.js"></script> -->
+
+</head>
+<body>
+<div class="background-image"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 col-md-6 col-md-offset-3">
+            
+            <div class="account-wall">
+				<h1 class="text-center login-title">Система маслораздачи «Эксперт М»<br>
+<small>Для входа в систему введите имя пользователя и пароль</small>
+</h1>
+                <form class="form-signin">
+                <select class="form-control" placeholder="Имя" required autofocus>
+                  <option></option>
+                  <option>Администратор</option>
+                  <option>Оператор Вася</option>
+                  <option>Мастер</option>
+                  <option>Наблюдатель</option>
+                </select>
+                
+                <input type="password" class="form-control" placeholder="Пароль" required>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">
+                    Вход</button>
+                </form>
+                <a href="#" class="text-center new-account">Забыли пароль?</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
