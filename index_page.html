@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="static/build/css/bootstrap.css" >
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="static/build/css/bootstrap-theme.css">
+
+	<link rel="stylesheet" href="static/build/css/ds-diget.css" >
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="static/build/js/bootstrap.min.js" ></script>
+	<style>
+		.counter-display {
+			background: black;
+			position: relative;
+    	    width: 100%;
+			padding-bottom: 60%;
+			float: left;
+			height: 0;
+			margin: 0 0 20px 0;
+		}
+		.counter-lcd {
+			fill: rgb(100,255,255);
+			filter:url(#glow);
+		}
+
+		.counter-display svg {
+			font-family: 'ds-digitalitalic';
+		    width: 100%;
+		    height: 100%;
+		    position: absolute;
+		    left: 0;
+		}
+
+		input[type="checkbox"].check-toggle {
+		    display: none;
+		}
+
+		input[type=checkbox].check-toggle + label:before {
+		  font-family: FontAwesome;
+		  display: inline-block;
+		}
+		
+		input[type=checkbox].check-toggle + label { font-size: 1.5em;  } /* unchecked icon */
+		input[type=checkbox].check-toggle + label:before { content: "\f096";} /* unchecked icon */
+		input[type=checkbox].check-toggle + label:before { letter-spacing: 11px; } /* space between checkbox and label */
+
+		input[type=checkbox].check-toggle:checked + label:before { content: "\f046"; } /* checked icon */
+		input[type=checkbox].check-toggle:checked + label:before { letter-spacing: 8px; } /* allow space for check mark */
+		
+		#navbar-clock
+{
+    /*position: absolute;
+    width: 100%;
+    margin: auto;
+    left: 0;*/
+    text-align: center;
+    
+	height: 50px;
+	padding: 15px;
+	font-size: 18px;
+	line-height: 20px;
+}
+		#navbar-user
+{
+
+    text-align: center;
+    
+	height: 50px;
+	padding: 15px;
+	font-size: 18px;
+	line-height: 20px;
+}
+@media (min-width: 768px) {
+
+	.navbar-nav-right>li {
+		float:right;
+	}	
+}
+	</style>
+	
+	<!-- jQuery + jQuery-UI -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+	<!-- keyboard -->
+	<link href="keyboard.min.css" rel="stylesheet">
+	<link href="jquery-ui.css" rel="stylesheet">
+	<!-- <link href="https://code.jquery.com/ui/1.11.4/themes/dot-luv/jquery-ui.css" rel="stylesheet"> -->
+	<script src="jquery.keyboard.min.js"></script>
+	<!-- keyboard extensions (optional) -->
+	<script src="jquery.mousewheel.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular.min.js"></script>
+
+
+
+	<!-- <script src="ng-virtual-keyboard.js"></script> -->
+
+</head>
+<body>
+	
+<!-- Static navbar -->
+<div class=" navbar navbar-default container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-md-5">
+            <p class="navbar-brand">
+            	<img src="static/build/css/img/fluid.png"  style="float:left;width:2em; margin: 2px 5px 4px 0 ">
+            	<a  href="#">Система маслораздачи Эксперт-М</a><br>
+            	<small>ООО Автомотив (812)309-05-42</small>
+            </p>
+        </div>
+        <div  id="navbar-clock" class="col-md-1 hidden-xs"> </div>
+        <p class="col-xs-12 col-md-2" id='navbar-user'>
+            Администратор
+        </p>
+        <ul class="col-xs-12 col-md-4 nav navbar-nav navbar-nav-right text-center">
+        	<li><a href="#">Выход <span class="fa fa-power-off fa-lg"></span></a></li>
+            <li><a href="">Настройки <i class="fa fa-cogs fa-lg	"></i></span></a></li>
+            <li><a href="">Помощь <i class="fa fa-question fa-lg	"></i></span></a></li>
+            
+        </ul>
+    </div>
+    <!--/.container-fluid -->
+</div>
+
+
+	<div class="container"  >
+	<div style="margin:2em"></div>
+		<div class="row">
+			<div class="col-md-4 col-xs-6 text-center"><a href="#"><img width="50%" src="static/build/css/img/plus.png"><h4>Приход</h4></a></div>
+			<div class="col-md-4 col-xs-6 text-center"><a href="#"><img width="50%" src="static/build/css/img/minus.png"><h4>Выдача</h4></a></div>
+			<div class="col-md-4 col-xs-6 text-center"><a href="#"><img width="50%" src="static/build/css/img/otchet.png"><h4>Отчеты</h4></a></div>
+			<div class="col-md-4 col-xs-6 text-center"><a href="#"><img width="50%" src="static/build/css/img/list.png"><h4>Задания на выдачу<h4></h4></div>
+			<div class="col-md-4 col-xs-6 text-center"><a href="#"><img width="50%" src="static/build/css/img/uroven.png"><h4>Уровни<h4></h4></div>
+			<div class="col-md-4 col-xs-6 text-center"><a href="#"><img width="50%" src="static/build/css/img/vopros.png"><h4>Задать вопрос<h4></h4></div>
+		</div>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster \
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script> -->
+	
+	<script type="text/javascript">
+		var clock = (function clock(clockNode){
+		    clockNode = clockNode || document.querySelector('#navbar-clock');
+		    //var currentTime,hours,minutes,seconds,timeOfDay;
+		    return function()
+		    {
+		        /*currentTime = new Date();
+		        hours = currentTime.getHours();
+		        minutes = currentTime.getMinutes();
+		        seconds = currentTime.getSeconds();
+		        timeOfDay = (hours < 12) ? 'AM' : 'PM';*/
+		        //clockNode.innerHTML = (hours + ":" + minutes + ":" + seconds + timeOfDay);
+		        clockNode.replaceChild(
+		            document.createTextNode(
+		                (new Date()).toLocaleTimeString()
+		            ),
+		            clockNode.childNodes.item(0)
+		        );
+		    };
+		}(document.querySelector('#navbar-clock')));
+		var clockInterval = setInterval(clock, 1000);
+	</script>
+</body>
+</html>
