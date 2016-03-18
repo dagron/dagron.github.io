@@ -56,32 +56,15 @@
 		
 		#navbar-clock
 {
-    /*position: absolute;
+    position: absolute;
     width: 100%;
+    left: 0;
+    text-align: center;
     margin: auto;
-    left: 0;*/
-    text-align: center;
-    
 	height: 50px;
 	padding: 15px;
 	font-size: 18px;
 	line-height: 20px;
-}
-		#navbar-user
-{
-
-    text-align: center;
-    
-	height: 50px;
-	padding: 15px;
-	font-size: 18px;
-	line-height: 20px;
-}
-@media (min-width: 768px) {
-
-	.navbar-nav-right>li {
-		float:right;
-	}	
 }
 	</style>
 	
@@ -105,30 +88,22 @@
 </head>
 <body>
 	
-<!-- Static navbar -->
-<div class=" navbar navbar-default container-fluid">
-    <div class="row">
-        <div class="col-xs-12 col-md-5">
-            <p class="navbar-brand">
-            	<img src="static/build/css/img/fluid.png"  style="float:left;width:2em; margin: 2px 5px 4px 0 ">
-            	<a  href="#">Система маслораздачи Эксперт-М</a><br>
-            	<small>ООО Автомотив (812)309-05-42</small>
-            </p>
-        </div>
-        <div  id="navbar-clock" class="col-md-1 hidden-xs"> </div>
-        <p class="col-xs-12 col-md-2" id='navbar-user'>
-            Администратор
-        </p>
-        <ul class="col-xs-12 col-md-4 nav navbar-nav navbar-nav-right text-center">
-        	<li><a href="#">Выход <span class="fa fa-power-off fa-lg"></span></a></li>
-            <li><a href="">Настройки <i class="fa fa-cogs fa-lg	"></i></span></a></li>
-            <li><a href="">Помощь <i class="fa fa-question fa-lg	"></i></span></a></li>
-            
-        </ul>
-    </div>
-    <!--/.container-fluid -->
-</div>
-
+ 	<!-- Static navbar -->
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Маслораздача</a>
+          </div>
+          <p id="navbar-clock" class="hidden-xs"> </p>
+          <div id="navbar" class="">
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="">
+Настройки <i class="fa fa-cogs fa-lg	"></i></span></a></li>
+              <li><a href="#">Администратор <span class="fa fa-power-off fa-lg"></span></a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
 
 	<div class="container" ng-app="Maslo" ng-controller="IssueManuallCtrl" >
 		<div class="row"><h2 class="text-center">ПИСТОЛЕТ №1 <b>Моторное масло №1</b></div>
